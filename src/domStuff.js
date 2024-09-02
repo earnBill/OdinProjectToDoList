@@ -3,8 +3,12 @@ import { tasks, createTask } from "./index.js";
 const main = document.querySelector('main');
 const container = document.querySelector('.container');
 const tasksContainer = document.querySelector('.tasks-container');
+const body = document.getElementsByTagName('body')[0];
 
 function createForm() {
+    const overlay = document.createElement('div');
+    overlay.className = 'overlay';
+
     console.log('create form');
     const formContainer = document.createElement('div');
     formContainer.className = 'form-container';
@@ -66,6 +70,7 @@ function createForm() {
     const cancel = document.createElement('button');
     cancel.textContent = "Cancel";
 
+    
     priorityContainer.append(lowLabel, lowRadio, mediumLabel, mediumRadio, hightLabel, hightRadio);
     
     form.appendChild(titleLabel);
@@ -80,7 +85,8 @@ function createForm() {
     form.appendChild(cancel);
 
     formContainer.appendChild(form);
-    container.appendChild(formContainer);
+    body.appendChild(overlay);
+    overlay.appendChild(formContainer);
 
   
     submit.addEventListener('click', (event) => {
@@ -91,7 +97,7 @@ function createForm() {
         tasks.push(createTask(title.value, description.value, date.value, checked.value));
         console.log(tasks);
         console.log(date.value);
-        clear();
+        overlay.remove();
 
         let lastTask = tasks.slice(-1);
         renderTask(lastTask);
@@ -100,7 +106,7 @@ function createForm() {
     })
     cancel.addEventListener('click', ()=> {
         console.log('cancelllll');
-        clear();
+        overlay.remove();
     })
 
     
