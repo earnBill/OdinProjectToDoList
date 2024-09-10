@@ -1,5 +1,7 @@
 import { tasks, createTask } from "./index.js";
+import { projects } from "./project.js";
 
+console.log(projects);
 const main = document.querySelector('main');
 const container = document.querySelector('.container');
 const tasksContainer = document.querySelector('.tasks-container');
@@ -62,6 +64,20 @@ function createForm() {
     hightRadio.name = 'taskPriority';
     hightRadio.value = 'hight';
 
+    const projectLabel = document.createElement('label');
+    projectLabel.textContent = 'Project';
+    const projectComboBox = document.createElement('select');
+
+    for (const projectName of projects) {
+        const boxOption = document.createElement('option');
+        boxOption.value = projectName;
+        boxOption.text = projectName;
+        projectComboBox.appendChild(boxOption);
+        console.log(projectName);
+        console.log(projectName);
+    }
+
+    
     const submit = document.createElement('button');
     submit.classList = 'submit';
     submit.type = "submit";
@@ -81,8 +97,11 @@ function createForm() {
     form.appendChild(date);
     form.appendChild(priorityLabel);
     form.appendChild(priorityContainer);
+    form.appendChild(projectLabel);
+    form.appendChild(projectComboBox);
     form.appendChild(submit);
     form.appendChild(cancel);
+    
 
     formContainer.appendChild(form);
     body.appendChild(overlay);
