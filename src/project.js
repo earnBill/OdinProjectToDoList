@@ -1,13 +1,26 @@
-const projects = ['general'];
+import { renderTask } from "./domStuff.js";
+import { tasks } from "./index.js";
+
+
+const body = document.getElementsByTagName('body')[0];
+const aside = document.getElementsByTagName('aside')[0];
+const main =document.getElementsByTagName('main')[0];
+
+const projects = ['General'];
+
+const defaultProject = document.createElement('div');
+defaultProject.textContent = projects[0];
+defaultProject.className = 'projects';
+aside.appendChild(defaultProject);
+
+
 
 function createProject() {
-    const body = document.getElementsByTagName('body')[0];
+    
     const overlay = document.createElement('div');
     overlay.className = 'overlay';
-    const aside = document.getElementsByTagName('aside')[0];
-    const main =document.getElementsByTagName('main')[0];
-
     const projectDiv = document.createElement('div');
+    projectDiv.className = 'projects';
     const formProjectContainer = document.createElement('div');
     formProjectContainer.className = 'form-project-container';
     const projectForm = document.createElement('form');
@@ -37,6 +50,17 @@ function createProject() {
         projects.push(projectName);
         console.log(projects);
         overlay.remove();
+
+        const allProjects = document.querySelectorAll('.projects');
+        console.log(allProjects);
+
+        allProjects.forEach((project) => {
+            project.addEventListener('click', () => {
+            const tasksContainer = document.querySelector('.tasks-container');
+            tasksContainer.innerHTML = '';
+            renderTask(tasks.filter(task => task.project === project.textContent));                
+            })
+        })
     });
    
 }

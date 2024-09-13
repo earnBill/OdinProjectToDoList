@@ -15,15 +15,12 @@ addTask.addEventListener('click', () => {
 projectButton.addEventListener('click', () => {
     createProject();
     console.log('new Project');
+    
 })
 
 function createTask(title, description, dueDate, priority, project) {
     return { title, description, dueDate, priority, project };
 }
-
-tasks.push(createTask('Bnb','Go to work', '10', 'hight'));
-console.log(tasks);
-console.log(tasks[0].description);
 
 export {tasks, createTask};
 

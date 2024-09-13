@@ -113,7 +113,7 @@ function createForm() {
         console.log(checked.value);        
         event.preventDefault();
         console.log('add task');
-        tasks.push(createTask(title.value, description.value, date.value, checked.value));
+        tasks.push(createTask(title.value, description.value, date.value, checked.value, projectComboBox.value));
         console.log(tasks);
         console.log(date.value);
         overlay.remove();
@@ -132,26 +132,28 @@ function createForm() {
 }
 
 function renderTask(task) {
-    const taskContainer = document.createElement('div');
-    taskContainer.className = 'task-container';
-    const titleDiv = document.createElement('div');
-    titleDiv.className = 'title';
-    const descriptionDiv = document.createElement('div');
-    descriptionDiv.className = 'description';
-    const dateDiv = document.createElement('div');
-    dateDiv.className = 'date';
-    const priorityDiv = document.createElement('div');
-    priorityDiv.className = 'priority';
+    for (let i = 0; i < task.length; i++) {
+      const taskContainer = document.createElement('div');
+      taskContainer.className = 'task-container';
+      const titleDiv = document.createElement('div');
+      titleDiv.className = 'title';
+      const descriptionDiv = document.createElement('div');
+      descriptionDiv.className = 'description';
+      const dateDiv = document.createElement('div');
+      dateDiv.className = 'date';
+      const priorityDiv = document.createElement('div');
+      priorityDiv.className = 'priority';
 
-    titleDiv.textContent = task[0].title;
-    descriptionDiv.textContent = task[0].description;
-    dateDiv.textContent = task[0].dueDate;
-    priorityDiv.textContent = task[0].priority;
-    console.log(task[0].priority);
+      titleDiv.textContent = task[i].title;
+      descriptionDiv.textContent = task[i].description;
+      dateDiv.textContent = task[i].dueDate;
+      priorityDiv.textContent = task[i].priority;
+      console.log(task[i].priority);
     
 
-    taskContainer.append(titleDiv, descriptionDiv, dateDiv, priorityDiv);
-    tasksContainer.appendChild(taskContainer);
+      taskContainer.append(titleDiv, descriptionDiv, dateDiv, priorityDiv);
+      tasksContainer.appendChild(taskContainer);
+    }
     
 }
 
@@ -161,4 +163,4 @@ function clear () {
     formContainer.remove();
 }
 
-export { createForm };
+export { createForm, renderTask };
