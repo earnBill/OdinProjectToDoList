@@ -94,3 +94,19 @@ button {
     color: grey;
     cursor:pointer;
 }
+
+.remove-icon {
+    background-image: url('./pictures/thrash.svg');
+    width: 24px;
+    height: 24px;
+}
+
+.edit-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.check-icon {
+    width: 24px;
+    height: 24px;
+}

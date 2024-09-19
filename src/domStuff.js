@@ -135,6 +135,7 @@ function renderTask(task) {
     for (let i = 0; i < task.length; i++) {
       const taskContainer = document.createElement('div');
       taskContainer.className = 'task-container';
+      
       const titleDiv = document.createElement('div');
       titleDiv.className = 'title';
       const descriptionDiv = document.createElement('div');
@@ -144,6 +145,19 @@ function renderTask(task) {
       const priorityDiv = document.createElement('div');
       priorityDiv.className = 'priority';
 
+      const checkIcon = document.createElement('div');
+      checkIcon.className = 'check-icon';
+      checkIcon.style.backgroundImage = "url('./pictures/cyrcle.svg')";
+
+      const editIcon = document.createElement('div');
+      editIcon.className = 'edit-icon';
+      editIcon.style.backgroundImage = "url('./pictures/edit.svg')";
+
+      const removeIcon = document.createElement('div');
+      removeIcon.className = 'remove-icon';
+      removeIcon.style.backgroundImage = "url('pictures/thrash.svg')";
+      
+
       titleDiv.textContent = task[i].title;
       descriptionDiv.textContent = task[i].description;
       dateDiv.textContent = task[i].dueDate;
@@ -151,7 +165,7 @@ function renderTask(task) {
       console.log(task[i].priority);
     
 
-      taskContainer.append(titleDiv, descriptionDiv, dateDiv, priorityDiv);
+      taskContainer.append(checkIcon, titleDiv, descriptionDiv, dateDiv, priorityDiv, editIcon,  removeIcon);
       tasksContainer.appendChild(taskContainer);
     }
     
