@@ -1,4 +1,4 @@
-import { createForm } from "./domStuff.js";
+import { createForm, removeTask } from "./domStuff.js";
 import { createProject} from "./project.js";
 
 const tasks = [];
@@ -10,7 +10,12 @@ const projectButton = document.querySelector('.add-project');
 addTask.addEventListener('click', () => {
     console.log(tasks)
     createForm();
-})
+    // const removeIcons = document.querySelectorAll('.remove-icon');
+    // console.log(removeIcons);
+    // removeIcons.forEach(icon => {
+    //   removeTask(icon);
+    // });
+});
 
 projectButton.addEventListener('click', () => {
     createProject();

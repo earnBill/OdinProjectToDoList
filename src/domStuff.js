@@ -156,8 +156,16 @@ function renderTask(task) {
       const removeIcon = document.createElement('div');
       removeIcon.className = 'remove-icon';
       removeIcon.style.backgroundImage = "url('pictures/thrash.svg')";
-      
+      removeIcon.dataset.index = task[i].description;
 
+      removeIcon.addEventListener('click', () => {
+        let index = tasks.findIndex((key) => key['description'] === removeIcon.dataset.index);
+        console.log(index);
+        tasks.splice(index,1);
+        console.log(tasks);
+        removeIcon.parentNode.remove();
+      })
+      
       titleDiv.textContent = task[i].title;
       descriptionDiv.textContent = task[i].description;
       dateDiv.textContent = task[i].dueDate;
@@ -177,4 +185,8 @@ function clear () {
     formContainer.remove();
 }
 
-export { createForm, renderTask };
+function removeTask(icon) {  
+    
+}
+
+export { createForm, renderTask, removeTask };
