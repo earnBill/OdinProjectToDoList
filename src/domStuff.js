@@ -1,5 +1,7 @@
 import { tasks, createTask } from "./index.js";
 import { projects } from "./project.js";
+import { saveTasks } from "./storage.js";
+
 
 console.log(projects);
 const main = document.querySelector('main');
@@ -122,6 +124,7 @@ function createForm() {
         renderTask(lastTask);
         console.log(lastTask.title);
 
+        saveTasks(tasks);
     })
     cancel.addEventListener('click', ()=> {
         console.log('cancelllll');
