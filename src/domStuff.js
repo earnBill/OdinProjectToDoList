@@ -18,19 +18,23 @@ function createForm() {
     formContainer.className = 'form-container';
 
     const form = document.createElement('form');
+    form.className = 'task-form';
 
     const titleLabel = document.createElement('label');
     titleLabel.textContent = 'Title';
     const title = document.createElement('input');
+    title.className = 'title-input';
 
     const descriptionLabel = document.createElement('label');
     descriptionLabel.textContent = 'Description';
     const description = document.createElement('input');
+    description.className = "description-input";
 
     const dateLabel = document.createElement('label');
     dateLabel.textContent = 'Date';
     const date = document.createElement('input');
     date.type = 'date';
+    date.className="date-input";
 
     const priorityLabel = document.createElement('label');
     priorityLabel.textContent = 'Priority';
@@ -69,6 +73,7 @@ function createForm() {
     const projectLabel = document.createElement('label');
     projectLabel.textContent = 'Project';
     const projectComboBox = document.createElement('select');
+    projectComboBox.className = "project-combo-box";
 
     for (const projectName of projects) {
         const boxOption = document.createElement('option');
@@ -155,6 +160,7 @@ function renderTask(task) {
       const editIcon = document.createElement('div');
       editIcon.className = 'edit-icon';
       editIcon.style.backgroundImage = "url('./pictures/edit.svg')";
+      editIcon.dataset.index = task[i].description;
 
       const removeIcon = document.createElement('div');
       removeIcon.className = 'remove-icon';
@@ -167,6 +173,43 @@ function renderTask(task) {
         tasks.splice(index,1);
         console.log(tasks);
         removeIcon.parentNode.remove();
+        saveTasks(tasks);
+        tasksContainer.innerHTML = '';
+        renderTask(tasks);
+      })
+
+      editIcon.addEventListener('click', ()=> {
+        let index = tasks.findIndex((key)=> key['description'] === editIcon.dataset.index);
+        console.log(index);
+        createForm();
+        const titleInput = document.querySelector('.title-input');
+        const descriptionInput = document.querySelector('.description-input');
+        const dateInput = document.querySelector('.date-input');
+        const projectCombo = document.querySelector('.project-combo-box');
+        const submit = document.querySelector('.submit');
+        const taskForm = document.querySelector('.task-form');
+        const updateBtn = document.createElement('button');
+        updateBtn.className = 'update-btn';
+        updateBtn.textContent = 'Update task';
+
+
+        titleInput.value = tasks[index].title;
+        descriptionInput.value = tasks[index].description;
+        dateInput.value = tasks[index].dueDate;
+        projectCombo.value = tasks[index].project;
+
+        submit.remove();
+        taskForm.appendChild(updateBtn);
+        
+        updateBtn.addEventListener('click', ()=> {
+            tasks[index].title = titleInput.value;
+            tasks[index].description = descriptionInput.value;
+            tasks[index].dueDate = dateInput.value;
+            tasks[index].project = projectCombo.value;
+            editIcon.parentNode.remove();
+            saveTasks(tasks);
+        })
+
       })
       
       titleDiv.textContent = task[i].title;

@@ -2,11 +2,12 @@ import { createForm, removeTask, renderTask } from "./domStuff.js";
 import { createProject} from "./project.js";
 import { loadTasks } from "./storage.js";
 
-const tasks = [];
-if (localStorage.length) {
-    const storedTAsks = [...loadTasks()];
-    console.logr(storedTAsks);
+let tasks = [];
+if (localStorage.length) { 
+    tasks = [...loadTasks(tasks)];
+    renderTask(tasks);
 ;}
+console.log(tasks);
 
 let addTask = document.querySelector('.add-task');
 let addProject = document.querySelector('.add-project');
