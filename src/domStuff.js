@@ -3,13 +3,14 @@ import { projects } from "./project.js";
 import { saveTasks } from "./storage.js";
 
 
-console.log(projects);
+
 const main = document.querySelector('main');
 const container = document.querySelector('.container');
 const tasksContainer = document.querySelector('.tasks-container');
 const body = document.getElementsByTagName('body')[0];
 
 function createForm() {
+    console.log(projects);
     const overlay = document.createElement('div');
     overlay.className = 'overlay';
 
@@ -80,7 +81,6 @@ function createForm() {
         boxOption.value = projectName;
         boxOption.text = projectName;
         projectComboBox.appendChild(boxOption);
-        console.log(projectName);
         console.log(projectName);
     }
 
@@ -224,6 +224,7 @@ function renderTask(task) {
     }
     
 }
+
 
 function clear () {
     console.log('clearrrrrrrrrrrrrr');

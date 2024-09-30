@@ -1,18 +1,18 @@
 import { renderTask } from "./domStuff.js";
 import { tasks } from "./index.js";
+import { saveProjects } from "./storage.js";
 
+let projects = ["General"];
 
 const body = document.getElementsByTagName('body')[0];
 const aside = document.getElementsByTagName('aside')[0];
 const main =document.getElementsByTagName('main')[0];
+console.log(projects);
 
-const projects = ['General'];
-
-const defaultProject = document.createElement('div');
-defaultProject.textContent = projects[0];
-defaultProject.className = 'projects';
-aside.appendChild(defaultProject);
-
+// const defaultProject = document.createElement('div');
+// defaultProject.textContent = projects[0];
+// defaultProject.className = 'projects';
+// aside.appendChild(defaultProject);
 
 
 function createProject() {
@@ -49,21 +49,43 @@ function createProject() {
         aside.appendChild(projectDiv);
         projects.push(projectName);
         console.log(projects);
+        saveProjects(projects);
         overlay.remove();
 
-        const allProjects = document.querySelectorAll('.projects');
-        console.log(allProjects);
-
-        allProjects.forEach((project) => {
-            project.addEventListener('click', () => {
-            const tasksContainer = document.querySelector('.tasks-container');
-            tasksContainer.innerHTML = '';
-            renderTask(tasks.filter(task => task.project === project.textContent));                
-            })
-        })
     });
    
 }
 
+function renderProjects() {
+    for (let project of projects) {
+        const projectContainer = document.createElement('div');
+        const addProject = document.createElement('div');
+        const delProject = document.createElement('div');
+        projectContainer.className = 'project-container';
+        addProject.className = 'projects';
+        delProject.className = 'remove-icon';
+        addProject.textContent = project;
+        projectContainer.append(addProject, delProject);
+        aside.appendChild(projectContainer);
+        
+    }
+    const allProjects = document.querySelectorAll('.projects');
+    console.log(allProjects);
+    allProjects.forEach((project) => {
+        project.addEventListener('click', () => {
+            const tasksContainer = document.querySelector('.tasks-container');
+            console.log('you click me');
+            if (project.textContent === 'General') {
+                tasksContainer.innerHTML = '';
+                renderTask(tasks);
+                console.log(tasks);
+            }
+            else {
+                tasksContainer.innerHTML = '';
+                renderTask(tasks.filter(task => task.project === project.textContent));                
+            }
+        })
+    })
+}
 
-export { createProject, projects };
+export { createProject, projects, renderProjects };

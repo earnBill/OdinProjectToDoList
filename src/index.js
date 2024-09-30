@@ -1,12 +1,25 @@
 import { createForm, removeTask, renderTask } from "./domStuff.js";
-import { createProject} from "./project.js";
-import { loadTasks } from "./storage.js";
+import { createProject, projects, renderProjects} from "./project.js";
+import { loadProjects, loadTasks, saveProjects, saveTasks } from "./storage.js";
 
 let tasks = [];
+
+console.log(projects)
+
 if (localStorage.length) { 
-    tasks = [...loadTasks(tasks)];
+    tasks = [...loadTasks()];
+    projects = [...loadProjects()];
     renderTask(tasks);
-;}
+    renderProjects(projects);
+    let bill = loadProjects();
+    console.log(bill);
+}
+else {
+    renderProjects(projects);
+    saveTasks(tasks);
+    saveProjects(projects);
+}
+
 console.log(tasks);
 
 let addTask = document.querySelector('.add-task');
@@ -34,5 +47,5 @@ function createTask(title, description, dueDate, priority, project) {
     return { title, description, dueDate, priority, project };
 }
 
-export {tasks, createTask};
+export { tasks, createTask };
 
