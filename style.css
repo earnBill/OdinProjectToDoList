@@ -110,3 +110,8 @@ button {
     width: 24px;
     height: 24px;
 }
+
+.project-container {
+    display: flex;
+    justify-content: space-between;
+}
