@@ -67,7 +67,16 @@ function renderProjects() {
         addProject.textContent = project;
         projectContainer.append(addProject, delProject);
         aside.appendChild(projectContainer);
-        
+
+        delProject.addEventListener('click', () => {
+            const deletedProject = addProject.textContent;
+            console.log(deletedProject);
+            const index = projects.findIndex(elem => elem === deletedProject);
+            console.log(index);
+            projects.splice(index,1);
+            console.log(projects);
+            delProject.parentNode.remove();
+        })
     }
     const allProjects = document.querySelectorAll('.projects');
     console.log(allProjects);

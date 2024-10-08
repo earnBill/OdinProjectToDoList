@@ -174,8 +174,8 @@ function renderTask(task) {
         console.log(tasks);
         removeIcon.parentNode.remove();
         saveTasks(tasks);
-        tasksContainer.innerHTML = '';
-        renderTask(tasks);
+        // tasksContainer.innerHTML = '';
+        // renderTask(tasks);
       })
 
       editIcon.addEventListener('click', ()=> {
