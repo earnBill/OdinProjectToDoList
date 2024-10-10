@@ -1,12 +1,14 @@
 import { renderTask } from "./domStuff.js";
 import { tasks } from "./index.js";
-import { saveProjects } from "./storage.js";
+import { saveProjects, saveTasks } from "./storage.js";
 
 let projects = ["General"];
 
 const body = document.getElementsByTagName('body')[0];
 const aside = document.getElementsByTagName('aside')[0];
 const main =document.getElementsByTagName('main')[0];
+const projectsContainer = document.querySelector('.projects-container');
+const tasksContainer = document.querySelector('.tasks-container');
 console.log(projects);
 
 // const defaultProject = document.createElement('div');
@@ -46,17 +48,19 @@ function createProject() {
         let projectName = inputForm.value;
         console.log(projectName);
         projectDiv.textContent = projectName;
-        aside.appendChild(projectDiv);
+        // aside.appendChild(projectDiv);
         projects.push(projectName);
         console.log(projects);
         saveProjects(projects);
         overlay.remove();
 
+        renderProjects();
     });
    
 }
 
 function renderProjects() {
+    projectsContainer.innerHTML = '';
     for (let project of projects) {
         const projectContainer = document.createElement('div');
         const addProject = document.createElement('div');
@@ -66,7 +70,7 @@ function renderProjects() {
         delProject.className = 'remove-icon';
         addProject.textContent = project;
         projectContainer.append(addProject, delProject);
-        aside.appendChild(projectContainer);
+        projectsContainer.appendChild(projectContainer);
 
         delProject.addEventListener('click', () => {
             const deletedProject = addProject.textContent;
@@ -76,6 +80,17 @@ function renderProjects() {
             projects.splice(index,1);
             console.log(projects);
             delProject.parentNode.remove();
+            saveProjects(projects);
+            tasks.filter((currentValue, index, array) => {
+                console.log(`The deleted project is ${currentValue.project}`);
+                if (currentValue.project === deletedProject) {
+                    array.splice(index, 1);
+                }
+            })
+            tasksContainer.innerHTML = '';
+            saveTasks(tasks);
+            renderTask(tasks);
+            console.log(tasks);
         })
     }
     const allProjects = document.querySelectorAll('.projects');
