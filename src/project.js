@@ -62,15 +62,17 @@ function createProject() {
 function renderProjects() {
     projectsContainer.innerHTML = '';
     for (let project of projects) {
-        const projectContainer = document.createElement('div');
-        const addProject = document.createElement('div');
-        const delProject = document.createElement('div');
-        projectContainer.className = 'project-container';
-        addProject.className = 'projects';
-        delProject.className = 'remove-icon';
-        addProject.textContent = project;
-        projectContainer.append(addProject, delProject);
-        projectsContainer.appendChild(projectContainer);
+        if (project != "General") {
+            const projectContainer = document.createElement('div');
+            const addProject = document.createElement('div');
+            const delProject = document.createElement('div');
+            projectContainer.className = 'project-container';
+            addProject.className = 'projects';
+            delProject.className = 'remove-icon';
+            addProject.textContent = project;
+            projectContainer.append(addProject, delProject);
+            projectsContainer.appendChild(projectContainer);
+        
 
         delProject.addEventListener('click', () => {
             const deletedProject = addProject.textContent;
@@ -91,7 +93,8 @@ function renderProjects() {
             saveTasks(tasks);
             renderTask(tasks);
             console.log(tasks);
-        })
+            })
+        }
     }
     const allProjects = document.querySelectorAll('.projects');
     console.log(allProjects);
