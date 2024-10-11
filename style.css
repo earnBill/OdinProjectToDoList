@@ -115,3 +115,8 @@ button {
     display: flex;
     justify-content: space-between;
 }
+
+.filter-tasks {
+    padding: 5px;
+    font-weight: bold;
+}
