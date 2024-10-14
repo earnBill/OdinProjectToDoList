@@ -1,6 +1,7 @@
 import { createForm, removeTask, renderTask } from "./domStuff.js";
 import { createProject, projects, renderProjects} from "./project.js";
 import { loadProjects, loadTasks, saveProjects, saveTasks } from "./storage.js";
+import { checkDate } from "./project.js";
 
 let tasks = [];
 
@@ -26,6 +27,7 @@ let addTask = document.querySelector('.add-task');
 let addProject = document.querySelector('.add-project');
 const container = document.querySelector('.container');
 const projectButton = document.querySelector('.add-project');
+const filterTasks = document.querySelectorAll('.filter-tasks');
 
 addTask.addEventListener('click', () => {
     console.log(tasks)
@@ -46,6 +48,12 @@ projectButton.addEventListener('click', () => {
 function createTask(title, description, dueDate, priority, project) {
     return { title, description, dueDate, priority, project };
 }
+
+filterTasks.forEach( filterTask => {
+    filterTask.addEventListener('click', () => { 
+        checkDate(filterTask.textContent);
+    })
+})
 
 export { tasks, createTask };
 

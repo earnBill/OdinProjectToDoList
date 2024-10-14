@@ -115,4 +115,18 @@ function renderProjects() {
     })
 }
 
-export { createProject, projects, renderProjects };
+function checkDate(day) {   
+    tasksContainer.innerHTML = '';
+    const today = new Date().toISOString().slice(0, 10); 
+    if(day === 'Today') {
+        renderTask(tasks.filter(day => day.dueDate === today));
+    }
+    else if (day === 'Upcoming') {
+        renderTask(tasks.filter(day => day.dueDate !== today));
+    }
+    else {
+        renderTask(tasks);
+    }
+}
+
+export { createProject, projects, renderProjects, checkDate };
