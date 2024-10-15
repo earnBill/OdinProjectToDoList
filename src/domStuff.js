@@ -166,6 +166,20 @@ function renderTask(task) {
       removeIcon.className = 'remove-icon';
       removeIcon.style.backgroundImage = "url('pictures/thrash.svg')";
       removeIcon.dataset.index = task[i].description;
+      
+      checkIcon.addEventListener('click', () => {
+        // const strike = document.createElement('s');
+        // taskContainer.parentNode.insertBefore(strike, taskContainer);
+        // strike.appendChild(taskContainer);
+        if (taskContainer.style.textDecoration === 'line-through') {
+            taskContainer.style.textDecoration = 'none';
+            console.log('text decorrrrrrrrrr');
+        } else {
+            taskContainer.style.textDecoration = 'line-through';
+            console.log('lineeeeeeeeeeeeeee');
+            console.log(taskContainer.style.textDecoration);
+        }
+      })
 
       removeIcon.addEventListener('click', () => {
         let index = tasks.findIndex((key) => key['description'] === removeIcon.dataset.index);
