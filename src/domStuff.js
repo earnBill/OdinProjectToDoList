@@ -63,13 +63,13 @@ function createForm() {
     mediumRadio.value = 'medium';
 
     const hightLabel = document.createElement('label');
-    hightLabel.textContent = 'Hight';
+    hightLabel.textContent = 'High';
     const hightRadio = document.createElement('input');
     hightRadio.type = 'radio';
     hightRadio.id = 'hightRadio';
     hightLabel.htmlFor = 'hightRadio';
     hightRadio.name = 'taskPriority';
-    hightRadio.value = 'hight';
+    hightRadio.value = 'high';
 
     const projectLabel = document.createElement('label');
     projectLabel.textContent = 'Project';
@@ -144,6 +144,8 @@ function renderTask(task) {
       const taskContainer = document.createElement('div');
       taskContainer.className = 'task-container';
       
+      const onlyTasks = document.createElement('div');
+      onlyTasks.className = 'only-tasks';
       const titleDiv = document.createElement('div');
       titleDiv.className = 'title';
       const descriptionDiv = document.createElement('div');
@@ -153,9 +155,13 @@ function renderTask(task) {
       const priorityDiv = document.createElement('div');
       priorityDiv.className = 'priority';
 
+
       const checkIcon = document.createElement('div');
       checkIcon.className = 'check-icon';
       checkIcon.style.backgroundImage = "url('./pictures/cyrcle.svg')";
+      
+      const buttonsContainer = document.createElement('div');
+      buttonsContainer.className = 'buttons-container';
 
       const editIcon = document.createElement('div');
       editIcon.className = 'edit-icon';
@@ -166,6 +172,14 @@ function renderTask(task) {
       removeIcon.className = 'remove-icon';
       removeIcon.style.backgroundImage = "url('pictures/thrash.svg')";
       removeIcon.dataset.index = task[i].description;
+
+      if (task[i].priority === 'low') {
+        taskContainer.style.border = '1px solid green';
+      } else if (task[i].priority === 'medium'){
+        taskContainer.style.border = '1px solid #ffe79a';
+      } else {
+        taskContainer.style.border = '1px solid red';
+      }
       
       checkIcon.addEventListener('click', () => {
         // const strike = document.createElement('s');
@@ -174,10 +188,12 @@ function renderTask(task) {
         if (taskContainer.style.textDecoration === 'line-through') {
             taskContainer.style.textDecoration = 'none';
             console.log('text decorrrrrrrrrr');
+            checkIcon.style.backgroundImage = "url('./pictures/cyrcle.svg')";
         } else {
             taskContainer.style.textDecoration = 'line-through';
             console.log('lineeeeeeeeeeeeeee');
             console.log(taskContainer.style.textDecoration);
+            checkIcon.style.backgroundImage = "url('./pictures/blackCyrcle.svg')";
         }
       })
 
@@ -231,9 +247,10 @@ function renderTask(task) {
       dateDiv.textContent = task[i].dueDate;
       priorityDiv.textContent = task[i].priority;
       console.log(task[i].priority);
-    
-
-      taskContainer.append(checkIcon, titleDiv, descriptionDiv, dateDiv, priorityDiv, editIcon,  removeIcon);
+      
+      onlyTasks.append(titleDiv, descriptionDiv, dateDiv)
+      buttonsContainer.append(editIcon, removeIcon);
+      taskContainer.append(checkIcon, onlyTasks, buttonsContainer);
       tasksContainer.appendChild(taskContainer);
     }
     

@@ -60,7 +60,10 @@ h1 {
 .task-container {
     display: flex;
     justify-content: space-between;
-    margin: 10px;
+    align-items: center;
+    padding: 4px;
+    margin-bottom: 2px;
+    border-radius: 10px;
 }
 
 
@@ -104,11 +107,17 @@ button {
 .edit-icon {
     width: 23px;
     height: 23px;
+    margin-right: 10px;
 }
 
 .check-icon {
-    width: 23px;
-    height: 23px;
+    width: 30px;
+    height: 25px;
+    background-repeat: no-repeat;
+}
+
+.check-icon:hover {
+    cursor: pointer;
 }
 
 .project-container {
@@ -129,4 +138,24 @@ button {
 .remove-icon:hover {
     background-color: rgba(0, 0, 0, 0.1);
     cursor: pointer;
+}
+
+.edit-icon:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.buttons-container {
+    display: flex;   
+}
+
+.task-container:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.only-tasks {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin: 0 10px;
 }
