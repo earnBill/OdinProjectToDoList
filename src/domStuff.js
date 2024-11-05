@@ -202,7 +202,7 @@ function renderTask(task) {
         console.log(index);
         tasks.splice(index,1);
         console.log(tasks);
-        removeIcon.parentNode.remove();
+        buttonsContainer.parentNode.remove();
         saveTasks(tasks);
         // tasksContainer.innerHTML = '';
         // renderTask(tasks);
