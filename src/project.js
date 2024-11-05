@@ -29,21 +29,24 @@ function createProject() {
     const headerForm = document.createElement('h3');
     headerForm.textContent = 'Add Project';
     const labelForm = document.createElement('label');
-    labelForm.textContent = 'Title:';
+    labelForm.textContent = 'Title ';
     const inputForm = document.createElement('input');
     inputForm.type = 'text';
-    const formButton = document.createElement('button');
-    formButton.textContent = 'Add project';
-    formButton.className = 'project-button';
+    const addButton = document.createElement('button');
+    addButton.textContent = 'Add project';
+    addButton.className = 'add-button';
+    const cancelButton = document.createElement('button');
+    cancelButton.className = 'cancel-button';
+    cancelButton.textContent = 'Cancel';
 
-    projectForm.append(headerForm, labelForm, inputForm, formButton);
+    projectForm.append(headerForm, labelForm, inputForm, addButton, cancelButton);
     formProjectContainer.appendChild(projectForm);
     overlay.appendChild(formProjectContainer);
     body.appendChild(overlay);
 
-    let projectFormButton = document.querySelector('.project-button');
+    // let projectFormButton = document.querySelector('.project-button');
     
-    projectFormButton.addEventListener('click', (event) => {
+    addButton.addEventListener('click', (event) => {
         event.preventDefault();
         let projectName = inputForm.value;
         console.log(projectName);
@@ -55,6 +58,10 @@ function createProject() {
         overlay.remove();
 
         renderProjects();
+    });
+
+    cancelButton.addEventListener('click', () => {
+        overlay.remove();
     });
    
 }
